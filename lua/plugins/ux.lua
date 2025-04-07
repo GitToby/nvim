@@ -1,5 +1,5 @@
 return {
-  -- default colour theme
+  -- colour scheme
   {
     "LazyVim/LazyVim",
     opts = {
@@ -7,12 +7,19 @@ return {
     },
   },
 
-  --  uv support, <leader>x[..]
+  -- Find Replace
   {
-    "benomahony/uv.nvim",
-    config = function()
-      require("uv").setup()
-    end,
+    "chrisgrieser/nvim-rip-substitute",
+    keys = {
+      {
+        "g/",
+        function()
+          require("rip-substitute").sub()
+        end,
+        mode = { "n", "x" },
+        desc = "Rip Substitute",
+      },
+    },
   },
 
   -- explorer window settings
@@ -35,24 +42,5 @@ return {
         },
       },
     },
-  },
-
-  -- SQL stuff
-  {
-    "kristijanhusak/vim-dadbod-ui",
-    dependencies = {
-      { "tpope/vim-dadbod", lazy = true },
-      { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true }, -- Optional
-    },
-    cmd = {
-      "DBUI",
-      "DBUIToggle",
-      "DBUIAddConnection",
-      "DBUIFindBuffer",
-    },
-    init = function()
-      -- Your DBUI configuration
-      vim.g.db_ui_use_nerd_fonts = 1
-    end,
   },
 }
